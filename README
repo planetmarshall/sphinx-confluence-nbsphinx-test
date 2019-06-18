@@ -1,0 +1,5 @@
+sphinx confluence nbsphinx test
+###############################
+
+This is a sample project showing the prospect of having nbsphinx support nodes
+for the Sphinx Confluence builder extension.
