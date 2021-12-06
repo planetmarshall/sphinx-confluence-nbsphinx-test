@@ -5,7 +5,6 @@ from setuptools import find_packages
 from setuptools import setup
 
 requires = [
-    'ipypublish',
     'nbsphinx',
     'sphinx',
     'sphinxcontrib-confluencebuilder',
