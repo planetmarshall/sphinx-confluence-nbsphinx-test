@@ -44,15 +44,23 @@ def _raw_to_literal_block(node: raw):
     return literal_block(node.rawsource, parser.content)
 
 
+def _set_prompt(node, prompt: str):
+    if prompt is not None:
+        node["scb-caption"] = prompt.replace("[", r"\[").replace("]", r"\]")
+
+
 def visit_CodeAreaNode(self: ConfluenceStorageFormatTranslator, node):
     child = node.children[0]
+    prompt = node.get("prompt", None)
     if child.tagname == 'literal_block':
         child["language"] = "python"
+        _set_prompt(child, prompt)
         pass
     else:
         # ignore the latex node
         raw_node = [raw for raw in child.children if raw["format"] == "html"][0]
         output_literal = _raw_to_literal_block(raw_node)
+        _set_prompt(output_literal, prompt)
         node.append(output_literal)
         pass
 
